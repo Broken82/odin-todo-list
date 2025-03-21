@@ -3,32 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Page</title>
+    <title>Todo List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav>
-            <button id="home">Home</button>
-            <button id="menu">Menu</button>
-            <button id="about">About</button>
-        </nav>
-    </header>
-    <div id="content">
-        <!-- <h4>Szefa's Rollos</h4>
-        <h2>2137-1337</h2>
-        <p>Welcome to Szefa's Rollos, fill your mouth with delicious
-             sosa with tender <i>kraft</i> meat!</p>
-        <p>All you ever had been needing will be fullfild here.</p>
-        <div class="underline"></div>
-        <h4>Hours</h3>
-        <h3>Monday: 9AM-9PM</h2>
-            <h3>Monday: 9AM-9PM</h2>
-                <h3>Monday: 9AM-9PM</h2>
-                    <h3>Monday: 9AM-9PM</h2>
-                        <h3>Monday: 9AM-9PM</h2>
-        <div class="underline"></div>
-        <h4>Location</h4>
-        <h3>Głogów, Aleja wolności</h3> -->
-    </div>
+    <aside>
+        <div class="projects">
+            <h2>Projects</h2>
+            <button class="project">
+                <svg class="folder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>folder</title><path d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z" /></svg>
+                <p>Default</p>
+            </button>
+            <button class="project">
+                <svg class="folder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>folder</title><path d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z" /></svg>
+                <p>School</p>
+            </button>
+            <button class="project">
+                <svg class="folder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>folder</title><path d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z" /></svg>
+                <p>Home</p>
+            </button>
+            <button class="add-project">
+                <svg style="fill: #b4b4b4; width: 25px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus-circle</title><path d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" /></svg>
+                <div>Add project</div>
+            </button>
+        </div>
+    </aside>
+    <article>
+        <div class="project-name">Default</div>
+        <div class="todo-list">
+            <button class="todo-item">
+                <div class="item-left">
+                    <input type="checkbox">
+                    Make dinner
+                </div>
+                <div class="due-date">Today</div>
+            </button>
+            <button class="todo-item">
+                <div class="item-left">
+                    <input type="checkbox">
+                    Make dinner
+                </div>
+                <div class="due-date">Today</div>
+            </button>
+            <button class="todo-item">
+                <div class="item-left">
+                    <input type="checkbox">
+                    Make dinner
+                </div>
+                <div class="due-date">Today</div>
+            </button>
+        </div>
+
+        <button class="add-todo">Add todo</button>
+    </article>
+
 </body>
 </html>
