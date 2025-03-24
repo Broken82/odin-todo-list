@@ -33,6 +33,42 @@
     <article>
         <div class="project-name">Default</div>
         <div class="todo-list">
+            <dialog class="task-modal" open >
+                <form action="">
+                    <button autofocus type="reset">X</button>
+                    <label for="title">
+                        <span>Title:</span>
+                    </label>
+                    <input type="text" id="title" name="title">
+                    <label for="descripton">
+                        <span>Description:</span>
+                    </label>
+                    <input type="text" id="descripton" name="descripton">
+                    <label for="date">
+                        <span>Date:</span>
+                    </label>
+                    <input type="date" id="date" name="date">
+                    <label for="priority">
+                        <span>Priority:</span>
+                    </label>
+                    <select name="priority" id="priority">
+                        <option value="low">Low</option>
+                        <option value="medium"> Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                    <button type="submit">Add</button>
+                </form>
+              </dialog>
+              <dialog class="project-modal" >
+                <form action="">
+                    <button autofocus type="reset">X</button>
+                    <label for="project-name">
+                        <span>Project name:</span>
+                    </label>
+                    <input type="text" id="project-name" name="project-name">
+                    <button type="submit">Add</button>
+                </form>
+              </dialog>
             <button class="todo-item">
                 <div class="item-left">
                     <input type="checkbox">
