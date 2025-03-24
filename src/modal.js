@@ -4,7 +4,6 @@ const dialogProject = document.querySelector(".project-modal");
 
 export function openAddTask() {
     dialogTask.showModal();
-    
   }
 
 export function closeAddTask(){
