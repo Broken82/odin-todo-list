@@ -17,6 +17,10 @@ console.log(projects)
 let currentProject = projects[0];
 
 
+
+
+
+
 //Handling adding listeners
 addListeners()
 
@@ -55,46 +59,92 @@ function handleAddProject(e){
     console.log(projects)
     e.preventDefault();
     e.target.parentElement.close();
-    render()
+    renderProjects()
 }
 
 
 
-function render(){
+function renderProjects(){
     //Project tab
-    const projectTab = document.querySelector("div.projects");
+    const projectTab = document.querySelector("div.project-buttons");
+    projectTab.innerHTML = '';
+
+
     projects.forEach(p => {
         let project = document.createElement("button");
         project.classList.add("project");
 
         //SVG
-        let projectIcon = document.createElement("svg");
+        let projectIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         projectIcon.classList.add("folder-icon");
-        projectIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
         projectIcon.setAttribute("viewBox", "0 0 24 24");
 
         //TITLE
         let svgTitle = document.createElement("title")
-        svgTitle.value = 'folder';
+        svgTitle.textContent = 'folder';
 
         projectIcon.append(svgTitle);
         
         
         //PATH
-        let pathElement = document.createElement("path")
+        let pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path")
         pathElement.setAttribute("d", "M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z");
 
         projectIcon.append(pathElement);
 
         //Project name
         let projectName = document.createElement("p");
-        projectName.value = p.name;
+        projectName.textContent = p.name;
 
         project.append(projectIcon);
         project.append(projectName);
 
         projectTab.append(project);
+
+        //Changing project listener
+        addChangeProjectListener(p, project)
+
         
+    });
+    
+
+}
+
+function addChangeProjectListener(project, button){
+
+    button.addEventListener("click", () =>{
+        currentProject = project;
+        console.log(currentProject);
+        console.log(button);
+        displayTasks(currentProject);
+    })
+    
+
+}
+
+
+function displayTasks(project){
+
+    const projectName = document.querySelector(".project-name");
+    
+    projectName.textContent = project.name;
+    const taskList = document.querySelector(".todos")
+    taskList.innerHTML = '';
+
+    project.tasks.forEach(task => {
+        let todo = `<button class="todo-item">
+                        <div class="item-left">
+                            <input type="checkbox">
+                            ${task.title}
+                        </div>
+                        <div class="due-date">${task.dueDate}</div>
+                    </button>
+            `
+
+            //dodac listener usuwania todo
+
+        taskList.innerHTML += todo;
+
     });
 
 }
