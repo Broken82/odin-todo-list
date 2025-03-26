@@ -48,8 +48,7 @@ const submitAddProject = document.querySelector("dialog.project-modal form");
 const submitAddTask = document.querySelector("dialog.task-modal form");
 
 submitAddProject.addEventListener("submit", handleAddProject);
-
-
+submitAddTask.addEventListener("submit", handleAddTask);
 
 }
 
@@ -60,6 +59,22 @@ function handleAddProject(e){
     e.preventDefault();
     e.target.parentElement.close();
     renderProjects()
+}
+
+function handleAddTask(e){
+    const title = document.querySelector("input#title");
+    const description = document.querySelector("input#description");
+    const date = document.querySelector("input#date");
+    const priority = document.querySelector("select#priority");
+
+
+
+    currentProject.addTask(createTask(title.value, description.value, date.value, priority.value));
+
+    e.preventDefault();
+    e.target.parentElement.close();
+
+    displayTasks(currentProject)
 }
 
 
@@ -104,10 +119,7 @@ function renderProjects(){
         //Changing project listener
         addChangeProjectListener(p, project)
 
-        
-    });
-    
-
+    }); 
 }
 
 function addChangeProjectListener(project, button){
