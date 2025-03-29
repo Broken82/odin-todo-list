@@ -12,17 +12,15 @@ defaultProject.addTask(createTask("Make bed", "I need to make bed", "25-03-2025"
 defaultProject.addTask(createTask("Wash dishes", "Wash", "25-03-2025", "Low"));
 
 projects.push(defaultProject);
-console.log(projects)
+
 
 let currentProject = projects[0];
 
 
-
-
-
-
 //Handling adding listeners
 addListeners()
+renderProjects()
+displayTasks(currentProject)
 
 //Handling adding projects
 

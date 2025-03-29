@@ -8,7 +8,6 @@ export function createProject(name){
 
     function removeTask(task){
         this.tasks = this.tasks.filter((t) => t.id != task.id )
-        console.log(tasks)
     }
 
     return {id, name, tasks, addTask, removeTask}
