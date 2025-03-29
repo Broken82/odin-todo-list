@@ -3,11 +3,11 @@ export function createProject(name){
     let tasks = []
 
     function addTask(task){
-        tasks.push(task);
+        this.tasks.push(task);
     }
 
     function removeTask(task){
-        this.tasks = tasks.filter((t) => t.id != task.id )
+        this.tasks = this.tasks.filter((t) => t.id != task.id )
         console.log(tasks)
     }
 
