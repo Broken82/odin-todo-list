@@ -144,19 +144,44 @@ function displayTasks(project){
     taskList.innerHTML = '';
 
     project.tasks.forEach(task => {
-        let todo = `<button class="todo-item">
-                        <div class="item-left">
-                            <input type="checkbox">
-                            ${task.title}
-                        </div>
-                        <div class="due-date">${task.dueDate}</div>
-                    </button>
-            `
+        let todoItem = document.createElement("button");
+        todoItem.className = "todo-item";
 
-            //dodac listener usuwania todo
+        let itemLeft = document.createElement("div");
+        itemLeft.className = "item-left";
 
-        taskList.innerHTML += todo;
+        let checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+
+        itemLeft.appendChild(checkbox);
+        itemLeft.appendChild(document.createTextNode(task.title));
+
+        let dueDate = document.createElement("div");
+        dueDate.className = "due-date";
+        dueDate.textContent = task.dueDate;
+
+        todoItem.appendChild(itemLeft);
+        todoItem.appendChild(dueDate);
+
+        taskList.append(todoItem);
+
+        removeTaskListener(task, checkbox)
 
     });
+
+}
+
+
+function removeTaskListener(task, checkbox){
+
+
+    checkbox.addEventListener("click", () => {
+        currentProject.removeTask(task);
+
+        displayTasks(currentProject)
+        console.log(currentProject.tasks)
+
+    });
+
 
 }
