@@ -3,6 +3,7 @@ import { createTask } from "./task"
 import { createProject } from "./project"
 import { openAddProject, openAddTask, closeAddProject, closeAddTask } from "./modal"
 
+
 let projects = [];
 
 //Intializing website with default values
@@ -16,15 +17,21 @@ projects.push(defaultProject);
 
 let currentProject = projects[0];
 
+localStorage.setItem("project", JSON.stringify(projects))
+
+let defaultStorage = JSON.parse(localStorage.getItem("project"))
+
+defaultStorage[0].addTask = defaultProject.addTask
+defaultStorage[0].removeTask = defaultProject.removeTask
+
+projects = [defaultStorage[0]]
+
+
 
 //Handling adding listeners
 addListeners()
 renderProjects()
 displayTasks(currentProject)
-
-//Handling adding projects
-
-
 
 
 
@@ -52,10 +59,12 @@ submitAddTask.addEventListener("submit", handleAddTask);
 
 function handleAddProject(e){
     const projectName = document.querySelector("input#project-name")
-    projects.push(createProject(projectName.value))
+    const newProject = createProject(projectName.value)
+    projects.push(newProject)
     console.log(projects)
     e.preventDefault();
     e.target.parentElement.close();
+    addProjectToLocalStorage(newProject)
     renderProjects()
 }
 
@@ -66,12 +75,14 @@ function handleAddTask(e){
     const priority = document.querySelector("select#priority");
 
 
-
-    currentProject.addTask(createTask(title.value, description.value, date.value, priority.value));
+    const task = createTask(title.value, description.value, date.value, priority.value);
+    currentProject.addTask(task);
+    
 
     e.preventDefault();
     e.target.parentElement.close();
 
+    addTasktoLocalStorage(currentProject, task)
     displayTasks(currentProject)
 }
 
@@ -181,5 +192,26 @@ function removeTaskListener(task, checkbox){
 
     });
 
+}
+
+function addProjectToLocalStorage(project){
+    const storage = JSON.parse(localStorage.getItem("project"));
+    console.log(storage)
+    storage.push(project)
+    localStorage.setItem("project", JSON.stringify(storage)); 
+}
+
+
+function addTasktoLocalStorage(project, task){
+    const storage = JSON.parse(localStorage.getItem("project"))
+    const taskProject = storage.find(t => t.id == project.id)
+    const projectIndex = storage.findIndex(t => t.id == project.id)
+
+    taskProject.tasks.push(task);
+    storage[projectIndex]= taskProject
+
+    localStorage.setItem("project", JSON.stringify(storage))
 
 }
+
+
