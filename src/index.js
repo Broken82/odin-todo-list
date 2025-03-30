@@ -15,15 +15,8 @@ defaultProject.addTask(createTask("Wash dishes", "Wash", "25-03-2025", "Low"));
 projects.push(defaultProject);
 
 fetchLocalStorage()
-console.log(projects)
 
 let currentProject = projects[0];
-
-
-
-
-
-//Handling adding listeners
 
 addListeners()
 renderProjects()
@@ -32,26 +25,7 @@ displayTasks(currentProject)
 
 
 
-function addListeners(){
-//Modal Listeners
-const openProjectBtn = document.querySelector("button.add-project");
-const openTaskBtn = document.querySelector("button.add-todo");
-const closeProjectBtn = document.querySelector("dialog.project-modal button");
-const closeTaskBtn = document.querySelector("dialog.task-modal button");
-
-openProjectBtn.addEventListener("click", openAddProject);
-openTaskBtn.addEventListener("click", openAddTask);
-closeProjectBtn.addEventListener("click", closeAddProject);
-closeTaskBtn.addEventListener("click", closeAddTask);
-
-//Submit listeners
-const submitAddProject = document.querySelector("dialog.project-modal form");
-const submitAddTask = document.querySelector("dialog.task-modal form");
-
-submitAddProject.addEventListener("submit", handleAddProject);
-submitAddTask.addEventListener("submit", handleAddTask);
-
-}
+//Adding handlers
 
 function handleAddProject(e){
     const projectName = document.querySelector("input#project-name")
@@ -82,7 +56,7 @@ function handleAddTask(e){
     displayTasks(currentProject)
 }
 
-
+//Renderers
 
 function renderProjects(){
     //Project tab
@@ -127,18 +101,6 @@ function renderProjects(){
     }); 
 }
 
-function addChangeProjectListener(project, button){
-
-    button.addEventListener("click", () =>{
-        currentProject = project;
-        console.log(currentProject);
-        console.log(button);
-        displayTasks(currentProject);
-    })
-    
-
-}
-
 
 function displayTasks(project){
 
@@ -176,12 +138,49 @@ function displayTasks(project){
 
 }
 
+//Listeners
+
+function addListeners(){
+    //Modal Listeners
+    const openProjectBtn = document.querySelector("button.add-project");
+    const openTaskBtn = document.querySelector("button.add-todo");
+    const closeProjectBtn = document.querySelector("dialog.project-modal button");
+    const closeTaskBtn = document.querySelector("dialog.task-modal button");
+    
+    openProjectBtn.addEventListener("click", openAddProject);
+    openTaskBtn.addEventListener("click", openAddTask);
+    closeProjectBtn.addEventListener("click", closeAddProject);
+    closeTaskBtn.addEventListener("click", closeAddTask);
+    
+    //Submit listeners
+    const submitAddProject = document.querySelector("dialog.project-modal form");
+    const submitAddTask = document.querySelector("dialog.task-modal form");
+    
+    submitAddProject.addEventListener("submit", handleAddProject);
+    submitAddTask.addEventListener("submit", handleAddTask);
+    
+    }
+
+
+function addChangeProjectListener(project, button){
+
+    button.addEventListener("click", () =>{
+        currentProject = project;
+        console.log(currentProject);
+        console.log(button);
+        displayTasks(currentProject);
+    })
+    
+
+}
+
 
 function removeTaskListener(task, checkbox){
 
 
     checkbox.addEventListener("click", () => {
         currentProject.removeTask(task);
+        removeTaskFromLocalStorage(currentProject, task)
 
         displayTasks(currentProject)
         console.log(currentProject.tasks)
@@ -190,13 +189,15 @@ function removeTaskListener(task, checkbox){
 
 }
 
+
+//LocalStorage
+
+
 function addProjectToLocalStorage(project){
     const storage = JSON.parse(localStorage.getItem("project"));
     console.log(storage)
     storage.push(project)
     localStorage.setItem("project", JSON.stringify(storage)); 
-
-    //Dodać dodawanie metod do wyciąganych localStorage projektów
 }
 
 
@@ -209,6 +210,22 @@ function addTasktoLocalStorage(project, task){
     storage[projectIndex]= taskProject
 
     localStorage.setItem("project", JSON.stringify(storage))
+
+}
+
+function removeTaskFromLocalStorage(project, task){
+    const storage = JSON.parse(localStorage.getItem("project"))
+    let taskProject = storage.find(t => t.id == project.id)
+    const projectIndex = storage.findIndex(t => t.id == project.id)
+
+
+    taskProject = taskProject.tasks.filter(t => t.id != task.id)
+
+    storage[projectIndex].tasks = taskProject
+
+    localStorage.setItem("project", JSON.stringify(storage))
+
+    console.log("deleted")
 
 }
 
@@ -229,7 +246,6 @@ function fetchLocalStorage(){
         let defaultStorage = JSON.parse(localStorage.getItem("project"))
         defaultStorage.forEach(project => {
             project = addProjectMethods(project)
-
         });
         projects = defaultStorage
     }
