@@ -15,14 +15,17 @@ To-do app created as a part of [The Odin Project](https://www.theodinproject.com
 ## Instalation
 
 1. Clone the repository:
+2. 
    ```bash
    https://github.com/Broken82/odin-todo-list.git
    ```
 3. Navigate to project directory:
+4. 
    ```bash
    cd odin-todo-list
    ```
 5. Install dependencies:
+6. 
    ```bash
    npm install
    ```
@@ -30,6 +33,7 @@ To-do app created as a part of [The Odin Project](https://www.theodinproject.com
 ## Development
 
 1. Run the application:
+2. 
    ```bash
    npm run dev
    ```
