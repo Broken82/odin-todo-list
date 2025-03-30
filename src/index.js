@@ -14,21 +14,17 @@ defaultProject.addTask(createTask("Wash dishes", "Wash", "25-03-2025", "Low"));
 
 projects.push(defaultProject);
 
+fetchLocalStorage()
+console.log(projects)
 
 let currentProject = projects[0];
 
-localStorage.setItem("project", JSON.stringify(projects))
 
-let defaultStorage = JSON.parse(localStorage.getItem("project"))
-
-defaultStorage[0].addTask = defaultProject.addTask
-defaultStorage[0].removeTask = defaultProject.removeTask
-
-projects = [defaultStorage[0]]
 
 
 
 //Handling adding listeners
+
 addListeners()
 renderProjects()
 displayTasks(currentProject)
@@ -199,6 +195,8 @@ function addProjectToLocalStorage(project){
     console.log(storage)
     storage.push(project)
     localStorage.setItem("project", JSON.stringify(storage)); 
+
+    //Dodać dodawanie metod do wyciąganych localStorage projektów
 }
 
 
@@ -211,6 +209,31 @@ function addTasktoLocalStorage(project, task){
     storage[projectIndex]= taskProject
 
     localStorage.setItem("project", JSON.stringify(storage))
+
+}
+
+function addProjectMethods(project){
+project.addTask = defaultProject.addTask
+project.removeTask = defaultProject.removeTask
+return project
+}
+
+function fetchLocalStorage(){
+    if(localStorage.getItem("project") == null){
+        localStorage.setItem("project", JSON.stringify(projects))
+        let defaultStorage = JSON.parse(localStorage.getItem("project"))
+        defaultStorage[0] = addProjectMethods(defaultStorage[0])
+        projects = [defaultStorage[0]]
+    }
+    else{
+        let defaultStorage = JSON.parse(localStorage.getItem("project"))
+        defaultStorage.forEach(project => {
+            project = addProjectMethods(project)
+
+        });
+        projects = defaultStorage
+    }
+
 
 }
 
