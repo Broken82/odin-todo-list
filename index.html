@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  <script defer src="main.js"></script></head>
+  <body>
+    <aside>
+      <div class="projects">
+        <h2>Projects</h2>
+        <div class="project-buttons"></div>
+        <button class="add-project">
+          <svg
+            style="fill: #b4b4b4; width: 25px"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <title>plus-circle</title>
+            <path
+              d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+            />
+          </svg>
+          <div>Add project</div>
+        </button>
+      </div>
+    </aside>
+    <article>
+      <div class="project-name">Default</div>
+      <div class="todo-list">
+        <dialog class="task-modal">
+          <form action="">
+            <button autofocus type="reset">X</button>
+            <label for="title">
+              <span>Title:</span>
+            </label>
+            <input type="text" id="title" name="title" required />
+            <label for="descripton">
+              <span>Description:</span>
+            </label>
+            <input type="text" id="description" name="description" required />
+            <label for="date">
+              <span>Date:</span>
+            </label>
+            <input type="date" id="date" name="date" required />
+            <label for="priority">
+              <span>Priority:</span>
+            </label>
+            <select name="priority" id="priority" required>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+            <button type="submit">Add</button>
+          </form>
+        </dialog>
+        <dialog class="project-modal">
+          <form action="">
+            <button autofocus type="reset">X</button>
+            <label for="project-name">
+              <span>Project name:</span>
+            </label>
+            <input type="text" id="project-name" name="project-name" />
+            <button type="submit">Add</button>
+          </form>
+        </dialog>
+        <div class="todos"></div>
+      </div>
+      <button class="add-todo">Add todo</button>
+    </article>
+  </body>
+</html>
